@@ -1,0 +1,38 @@
+h1 {
+	text-align: center;
+	font-size: 55px;
+	/* color: insert color here */
+}
+
+.jukebox-buttons {
+	/*background-image: insert your button images here*/
+	display: inline-block;
+	float: inherit;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	margin: auto;
+
+}
+
+#previousbutton {
+	background-image: url('../images/heartpreviousbutton.jpg');
+	background-size: 100px 100px;
+}
+
+#playbutton {
+	background-image: url('../images/heartplaybutton.jpg');
+	background-size: 100px 100px;
+}
+
+#pausebutton {
+	background-image: url('../images/heartpausebutton.jpg');
+	background-size: 100px 100px;
+}
+#stopbutton {
+	background-image: url('../images/heartstopbutton.jpg');
+	background-size: 100px 100px;
+}
+#skipbutton {
+	background-image: url('../images/heartskipbutton.jpg');
+	background-size: 100px 100px;
+}
