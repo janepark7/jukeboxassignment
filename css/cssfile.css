@@ -1,38 +1,58 @@
 h1 {
+	padding-top: 100px;
 	text-align: center;
+	color: #bfbfbf;
+	text-shadow: 3px 3px #f2f2f2;
 	font-size: 55px;
 	/* color: insert color here */
 }
 
+body {
+	font-family: "Arial", sans-serif;
+	color: silver;
+	font-size: 13px;
+	background-color: #a30f2d;
+	background-image: url('../images/musicheartwallpaper.jpg');
+}
+
+.jukebox {
+	width: 430px;
+	min-height: 500px;
+	overflow: auto;
+	margin: 70px auto;
+	border: #595959 solid 2px;
+	border-radius: 10px;
+}
+/*
 .jukebox-buttons {
-	/*background-image: insert your button images here*/
-	display: inline-block;
-	float: inherit;
-	background-repeat: no-repeat;
-	background-size: 100px 100px;
-	margin: auto;
-
+	width: 90%;
+	display: block;
+	margin: 15px auto;
+	margin-left: 23px;
+	overflow: auto;
 }
 
-#previousbutton {
-	background-image: url('../images/heartpreviousbutton.jpg');
-	background-size: 100px 100px;
+.jukebox-buttons-previous {
+	width: 70px;
+	height: 70px;
+	background: url('../images/heartpreviousbutton.jpg') no-repeat;
+	float: left;
 }
 
-#playbutton {
+.jukebox-buttons-play {
 	background-image: url('../images/heartplaybutton.jpg');
 	background-size: 100px 100px;
 }
 
-#pausebutton {
+.jukebox-buttons-pause {
 	background-image: url('../images/heartpausebutton.jpg');
 	background-size: 100px 100px;
 }
-#stopbutton {
+.jukebox-buttons-stop {
 	background-image: url('../images/heartstopbutton.jpg');
 	background-size: 100px 100px;
 }
-#skipbutton {
+.jukebox-buttons-next {
 	background-image: url('../images/heartskipbutton.jpg');
 	background-size: 100px 100px;
 }

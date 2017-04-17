@@ -2,28 +2,33 @@
 <html>
 	<head>
 		<title>Jukebox Assignment</title>
-		<!--<link rel="stylesheet" type="text/css" href="./css/cssreset.css" />
-		<link rel="stylesheet" type="text/css" href="./css/cssfile.css" />-->
-		<script src="./scripts/jquery.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/cssreset.css" />
+		<link rel="stylesheet" type="text/css" href="./css/cssfile.css" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 		<script src="./scripts/scripts.js"></script>
 	</head>
 
 	<body>
 
-		<h1>Tune In Your Heart Playlist</h1>
+					<h1>Tune In Your Heart Playlist</h1>
 
 		<!--Jukebox buttons and functions-->
-		<div class="jukebox">
+			<div class="jukebox">
 			<div class="jukebox-songs"></div>
-
-			<button class="jukebox-buttons-previous">Previous</button>
-			<button class="jukebox-buttons-play">Play</button>
-			<button class="jukebox-buttons-pause">Pause</button>
-			<button class="jukebox-buttons-stop">Stop</button>
-			<button class="jukebox-buttons-next">Next</button>
-			<button class="jukebox-buttons-shuffle">Shuffle</button>
-			<button class="jukebox-buttons-mute">Mute</button>
-</div>
+			<div class="jukebox-buttons">
+				<button class="jukebox-buttons-previous">Previous</button>
+				<button class="jukebox-buttons-play">Play</button>
+				<button class="jukebox-buttons-pause">Pause</button>
+				<button class="jukebox-buttons-stop">Stop</button>
+				<button class="jukebox-buttons-next">Next</button>
+			<br>
+				<div class="jukebox-buttons-upload">Upload Your Own Music
+					<input type="file" accept="audio/*" multiple/>
+				</div>
+			</div>
+			</div>
 
 	</body>
 </html>
