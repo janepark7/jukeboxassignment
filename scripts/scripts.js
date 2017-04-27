@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals $, SC */
 
 /**
 * JUKEBOX SINGLETON
@@ -11,43 +11,56 @@ var Jukebox = {
 	dom: {},
 	currentIndex: 0,
 
-//This function will play the whole jukebox
-kickoff: function() { // this is your starting point
-	this.dom = {
-		play: $(".jukebox-buttons-play"),
-		previous: $(".jukebox-buttons-previous"),
-		next: $(".jukebox-buttons-next"),
-		//Hide Pause Button
-		pause: $(".jukebox-buttons-pause").hide(),
-		stop: $(".jukebox-buttons-stop"),
-		upload: $(".jukebox-buttons-upload input"),
-		songs: $(".jukebox-songs"),
-	};
+//	This function will play the whole jukebox
 
-//Loading songs in array......
+		kickoff: function() { // this is your starting point
 
-	this.addSong("./audiofiles/mama.mp3", {
-		title: "Me and Your Mama",
-		artist: "Childish Gambino",
-	});
+//	 Starting the SoundCloud API
 
-	this.addSong("./audiofiles/selfcontrol.mp3", {
-		title: "Self Control",
-		artist: "Frank Ocean",
-	});
+		SC.initialize({ client_id: "fd4e76fc67798bfa742089ed619084a6" });
 
-	this.addSong("./audiofiles/talktome.mp3", {
-		title: "Talk to Me",
-		artist: "Run the Jewels",
-	});
+//	Referring the dom elements
+		this.dom = {
+			play: $(".jukebox-buttons-play"),
+			previous: $(".jukebox-buttons-previous"),
+			next: $(".jukebox-buttons-next"),
+//	Hide Pause Button
+			pause: $(".jukebox-buttons-pause").hide(),
+			stop: $(".jukebox-buttons-stop"),
+			upload: $(".jukebox-buttons-upload input"),
+			songs: $(".jukebox-songs"),
+			add: $(".jukebox-buttons-add"),
+			input: $(".soundcloud-input"),
+		};
 
-	this.change(this.songs[0]);
+//	These are the songs in the array from my files......
+
+		this.addSong("./audiofiles/mama.mp3", {
+			title: "Me and Your Mama",
+			artist: "Childish Gambino",
+		});
+
+		this.addSong("./audiofiles/selfcontrol.mp3", {
+			title: "Self Control",
+			artist: "Frank Ocean",
+		});
+
+		this.addSong("./audiofiles/talktome.mp3", {
+			title: "Talk to Me",
+			artist: "Run the Jewels",
+		});
+
+		this.addSong("https://soundcloud.com/big-black-delta/big-black-delta-side-of-the", {
+			title: "Big black delta",
+			artist: "test artist",
+		});
+		this.change(this.songs[3]);
 
 // Render & Bind!
 
-	this.render(); //look up render
-	this.listenUp();
-},
+		this.render(); //look up render
+		this.listenUp();
+	},
 
 	listenUp: function() {
 		this.dom.play.on("click", function() {
@@ -66,74 +79,85 @@ kickoff: function() { // this is your starting point
 
 		this.dom.stop.on("click", this.stop.bind(this));
 
-//Upload songs onto the jukebox
+//	Upload songs onto the jukebox
 
 		this.dom.upload.on("change", function() {
-					var files = this.dom.upload.prop("files");
-					console.log(files);
+			var files = this.dom.upload.prop("files");
+			console.log(files);
 
-					for (var i = 0; i < files.length; i++) {
-						var file = URL.createObjectURL(files[i]);
-						this.addSong(file, {
-							title: "Uploaded song",
-							artist: "Unknown",
-						});
-					}
-				}.bind(this));
-			},
+			for (var i = 0; i < files.length; i++) {
+				var file = URL.createObjectURL(files[i]);
+				this.addSong(file, {
+					title: "Uploaded song",
+					artist: "Unknown",
+				});
+			}
+		}.bind(this));
 
-//Render song elements
+		this.dom.add.on("keypress", function() {
+			var url = this.dom.input.val();
+			console.log("SoundCloud is playing yo!");
+			this.addSong(url);
+		}.bind(this));
+			/*if (ev.key === "Enter" ) {
+				var song = $(ev.currentTarget).data("song");
+				this.play(song);
+			}
+		}.bind(this));*/
+	},
 
-render: function() {
-	this.dom.songs.html("");
-	for (var i = 0; i < this.songs.length; i++){
-		var $song = this.songs[i].render();
-		this.dom.songs.append($song);
+//	Render song elements
+
+	render: function() {
+		this.dom.songs.html("");
+		for (var i = 0; i < this.songs.length; i++){
+			var $song = this.songs[i].render();
+			this.dom.songs.append($song);
 
 		if(this.songs[i] === this.activeSong) {
 			$song.addClass("isActive");
 		}
-	}
-	//Indicate paused vs played
-	this.dom.play.toggleClass("isDisabled", this.isPlaying);
-	this.dom.stop.toggleClass("isDisabled", !this.isPlaying);
-},
+		}
+//	Indicate paused vs played
+		this.dom.play.toggleClass("isDisabled", this.isPlaying);
+		this.dom.stop.toggleClass("isDisabled", !this.isPlaying);
+	},
 
-//Play function to play the jukebox
-//When song is playing, the pause button will show
+//	Play function to play the jukebox
+//	When song is playing, the pause button will show
 
-play: function(song) {
-	console.log("this.activeSong");
-	$(".jukebox-buttons-play").hide();
-	$(".jukebox-buttons-pause").show();
-	if (song) {
-		this.change(song);
-	}
-	if (!this.activeSong) {
-		return false;
-	}
-	this.isPlaying = true;
-	this.activeSong.play();
-	this.render();
-	return this.activeSong;
-},
+	play: function(song) {
+		console.log("this.activeSong");
+		$(".jukebox-buttons-play").hide();
+		$(".jukebox-buttons-pause").show();
+		if (song) {
+			this.change(song);
+		}
+		if (!this.activeSong) {
+			return false;
+		}
+		this.isPlaying = true;
+		this.activeSong.play();
+		this.render();
+		return this.activeSong;
+	},
 
-//When the song is paused, the play button will appear
+//	When the song is paused, the play button will appear
 
-pause: function() {
-	console.log("Jukebox is paused");
-	$(".jukebox-buttons-play").show();
-	$(".jukebox-buttons-pause").hide();
-	this.activeSong.pause();
-	this.isPlaying = false;
-	this.render();
-	return this.activeSong;
-},
+	pause: function() {
+		console.log("Jukebox is paused");
+		$(".jukebox-buttons-play").show();
+		$(".jukebox-buttons-pause").hide();
+		this.activeSong.pause();
+		this.isPlaying = false;
+		this.render();
+		return this.activeSong;
+	},
 
-//Previous button - to make the songs go backwards
+//	Previous button - to make the songs go backwards
 
-previous: function() {
-	if (this.activeSong) {
+	previous: function() {
+		if (this.activeSong) {
 			this.activeSong.stop();
 			this.currentIndex --;
 
@@ -146,32 +170,26 @@ previous: function() {
 		}
 	},
 
-        /*if (this.activeSong) {
-            this.activeSong.pause();
-            this.currentIndex --;
-            this.activeSong = this.songs[this.currentIndex];
-            this.activeSong.play();
-						console.log("Jukebox is going back");
-        }
-    },*/
-
-stop: function() {
-	console.log('STOPPING');
-	this.activeSong.stop();
-	console.log("Jukebox is stopped");
-},
-
-change: function(song) {
-	if (this.activeSong) {
+//	Stop songs
+	stop: function() {
+		console.log('STOPPING');
 		this.activeSong.stop();
-	}
-	this.activeSong = song;
-	this.render();
-	return this.activeSong;
-},
+		console.log("Jukebox is stopped");
+	},
 
-next: function() {
-	if (this.activeSong) {
+//	Change the songs as they are active
+	change: function(song) {
+		if (this.activeSong) {
+			this.activeSong.stop();
+		}
+		this.activeSong = song;
+		this.render();
+		return this.activeSong;
+	},
+
+//	Next function - to skip songs
+	next: function() {
+		if (this.activeSong) {
 			this.activeSong.stop();
 			this.currentIndex ++;
 
@@ -184,13 +202,29 @@ next: function() {
 		}
 	},
 
-addSong: function(file, meta) {
-	var song = new Song(file, meta);
-	this.songs.push(song);
-	this.render();
-	return song;
-},
+//	Adding songs in the array
+	addSong: function(file, meta) {
+				var song;
+				console.log(file);
+				if (file.indexOf("soundcloud.com") !== -1) {
+					song = new SoundCloudSong(file, meta);
+				}
+				else {
+					song = new FileSong(file, meta);
+				}
+				this.songs.push(song);
 
+				//var $song = song.render();
+				//this.dom.songs.append($song);
+				this.render();
+				return song;
+			},
+
+		/*= new Song(file, meta);
+		this.songs.push(song);
+		this.render();
+		return song;
+	},*/
 };
 
 /**
@@ -198,32 +232,86 @@ addSong: function(file, meta) {
 */
 
 class Song {
-	constructor(file) {
-	this.file = file;
-	this.audio = new Audio(file);
+
+	//Creating a new song
+
+		constructor() {
+			this.file = null;
+			this.meta = {};
+			this.audio = null;
+			this.$song = $('<div class="jukebox-songs-song"></div>');
+			this.$song.data("song", this);
+			//this.file = file;
+			//this.audio = new Audio(file);
+		}
+
+		render() {
+			this.$song.html("");
+			//return $('<div class="jukebox-songs-song">' + this.file +'</div>');
+			return this.$song;
+		}
+
+		//	Play Song
+		play() {
+			this.audio.play();
+		}
+		// Pause Song
+		pause() {
+			this.audio.pause();
+		}
+		//	Stop Song
+		stop() {
+			this.audio.pause();
+			this.audio.currentTime = 0;
+		}
+
 	}
 
-	render() {
-		return $('<div class="jukebox-songs-song">' + this.file +'</div>');
+/**
+	* FileSong Class
+	*/
+
+	class FileSong extends Song {
+
+		constructor(file, meta) {
+			super(file);
+			this.file = file;
+			this.meta = meta || {
+				title: "Unknown title",
+				artist: "Unknown artist",
+			};
+			this.audio = new Audio(file);
+		}
+}
+
+/**
+*  SoundCloudSong Class
+*/
+
+
+	class SoundCloudSong extends Song {
+		constructor(url){
+			super();
+			SC.resolve(url)
+			.then(function(song) {
+				this.meta = {
+					title: song.title,
+					artist: song.user.username,
+				};
+				return song;
+			}.bind(this))
+			.then(function(song) {
+				var uri = song.uri + "/stream?client_id=fd4e76fc67798bfa742089ed619084a6";
+				this.audio = new Audio(uri);
+				console.log(uri);
+			}.bind(this))
+			.then(function() {
+				this.render();
+			}.bind(this));
+		}
 	}
 
-
-	play() {
-		this.audio.play();
-	}
-
-	pause() {
-		this.audio.pause();
-	}
-
-	stop() {
-		this.audio.pause();
-		this.audio.currentTime = 0;
-	}
-
-	}
-
+//	This will play the entire Jukebox
 $(document).ready(function() {
 	Jukebox.kickoff();
-
 });

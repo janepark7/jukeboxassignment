@@ -7,28 +7,35 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+	<!--SoundCloud API-->
+		<script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
 		<script src="./scripts/scripts.js"></script>
 	</head>
 
 	<body>
-
 					<h1>Tune In Your Heart Playlist</h1>
-
 		<!--Jukebox buttons and functions-->
 			<div class="jukebox">
-			<div class="jukebox-songs"></div>
-			<div class="jukebox-buttons">
-				<button class="jukebox-buttons-previous">Previous</button>
-				<button class="jukebox-buttons-play">Play</button>
-				<button class="jukebox-buttons-pause">Pause</button>
-				<button class="jukebox-buttons-stop">Stop</button>
-				<button class="jukebox-buttons-next">Next</button>
-			<br>
-				<div class="jukebox-buttons-upload">Upload Your Own Music
-					<input type="file" accept="audio/*" multiple/>
+				<div class="jukebox-songs"></div>
+					<div class="jukebox-buttons-upload">
+						<p>
+						Upload Music
+						<input type="file" accept="audio/*" multiple/>
+					</p>
+						<div class="jukebox-buttons-add">
+							<p>
+							Search Music
+						</p>
+						<input type="text" class="soundcloud-input" placeholder="Insert Soundcloud URL"/>
+					</div>
+					<div class="jukebox-master">
+						<div class="jukebox-master-hearts jukebox-buttons-previous"></div>
+						<div class="jukebox-master-hearts jukebox-buttons-play"></div>
+						<div class="jukebox-master-hearts jukebox-buttons-pause"></div>
+						<div class="jukebox-master-hearts jukebox-buttons-stop"></div>
+						<div class="jukebox-master-hearts jukebox-buttons-next"></div>
 				</div>
 			</div>
-			</div>
-
+		</div>
 	</body>
 </html>

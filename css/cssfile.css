@@ -1,16 +1,19 @@
 h1 {
-	padding-top: 100px;
+	padding-top: 55px;
+	padding-left: 5px;
 	text-align: center;
-	color: #bfbfbf;
-	text-shadow: 3px 3px #f2f2f2;
-	font-size: 55px;
+	color: grey;
+	text-shadow: 2px 2px white;
+	font-size: 50px;
+	font-family: fantasy, cursive, sans-serif;
 	/* color: insert color here */
 }
 
 body {
 	font-family: "Arial", sans-serif;
-	color: silver;
-	font-size: 13px;
+
+	color: black;
+	font-size: 15px;
 	background-color: #a30f2d;
 	background-image: url('../images/musicheartwallpaper.jpg');
 }
@@ -22,37 +25,67 @@ body {
 	margin: 70px auto;
 	border: #595959 solid 2px;
 	border-radius: 10px;
+	background-color: #eb2d53;
+	opacity: 0.6;
 }
+
 /*
-.jukebox-buttons {
+.jukebox {
 	width: 90%;
 	display: block;
 	margin: 15px auto;
 	margin-left: 23px;
 	overflow: auto;
+	float: left;
+}
+*/
+
+.jukebox-master-hearts {
+	width: 95px;
+	height: 95px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	float: left;
+	display: block;
+	cursor: pointer;
 }
 
 .jukebox-buttons-previous {
-	width: 70px;
-	height: 70px;
-	background: url('../images/heartpreviousbutton.jpg') no-repeat;
-	float: left;
+	background-image: url('../images/heartpreviousbutton.svg');
+	padding-left: 25px;
 }
 
 .jukebox-buttons-play {
-	background-image: url('../images/heartplaybutton.jpg');
-	background-size: 100px 100px;
+	background-image: url('../images/heartplaybutton.svg');
+	padding-left: 5px;
 }
 
 .jukebox-buttons-pause {
-	background-image: url('../images/heartpausebutton.jpg');
-	background-size: 100px 100px;
+	background-image: url('../images/heartpausebutton.svg');
+	padding-left: 5px;
 }
 .jukebox-buttons-stop {
-	background-image: url('../images/heartstopbutton.jpg');
-	background-size: 100px 100px;
+	background-image: url('../images/heartstopbutton.svg');
+	padding-left: 5px;
 }
 .jukebox-buttons-next {
-	background-image: url('../images/heartskipbutton.jpg');
-	background-size: 100px 100px;
+	background-image: url('../images/heartskipbutton.svg');
+	padding-left: 9px;
+}
+
+p {
+	height: 50px;
+}
+
+.jukebox-buttons-upload {
+	height: 80px;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+.jukebox-songs {
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 10px;
 }
