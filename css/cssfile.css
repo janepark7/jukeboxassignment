@@ -25,8 +25,7 @@ body {
 	margin: 70px auto;
 	border: #595959 solid 2px;
 	border-radius: 10px;
-	background-color: #eb2d53;
-	opacity: 0.6;
+	background-color: rgba(235, 45, 83, .5);
 }
 
 /*
@@ -53,7 +52,7 @@ body {
 
 .jukebox-buttons-previous {
 	background-image: url('../images/heartpreviousbutton.svg');
-	padding-left: 25px;
+	padding-left: 5px;
 }
 
 .jukebox-buttons-play {
@@ -75,7 +74,11 @@ body {
 }
 
 p {
-	height: 50px;
+	height: 30px;
+}
+
+p2 {
+	height: 5px;
 }
 
 .jukebox-buttons-upload {
@@ -88,4 +91,16 @@ p {
 	text-align: center;
 	padding-top: 25px;
 	padding-bottom: 10px;
+}
+
+.jukebox-songs-art {
+	top: 50px;
+	left: 50px;
+	margin: 0 auto;
+}
+
+.artwork {
+	top: 50px;
+	left: 50px;
+	margin: 0 auto;
 }

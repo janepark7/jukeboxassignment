@@ -31,6 +31,7 @@ var Jukebox = {
 			songs: $(".jukebox-songs"),
 			add: $(".jukebox-buttons-add"),
 			input: $(".soundcloud-input"),
+			artwork: $("jukebox-songs-art"),
 		};
 
 //	These are the songs in the array from my files......
@@ -38,23 +39,26 @@ var Jukebox = {
 		this.addSong("./audiofiles/mama.mp3", {
 			title: "Me and Your Mama",
 			artist: "Childish Gambino",
+			artwork: ("./images/childishgambino.jpg"),
 		});
 
 		this.addSong("./audiofiles/selfcontrol.mp3", {
 			title: "Self Control",
 			artist: "Frank Ocean",
+			artwork: ("./images/frankocean.jpg"),
 		});
 
 		this.addSong("./audiofiles/talktome.mp3", {
 			title: "Talk to Me",
 			artist: "Run the Jewels",
+			artwork: ("./images/runthejewels.jpg"),
 		});
 
 		this.addSong("https://soundcloud.com/big-black-delta/big-black-delta-side-of-the", {
-			title: "Big black delta",
-			artist: "test artist",
+			title: "Side of the Road",
+			artist: "Big Black Delta",
 		});
-		this.change(this.songs[3]);
+		this.change(this.songs[0]);
 
 // Render & Bind!
 
@@ -240,6 +244,7 @@ class Song {
 			this.meta = {};
 			this.audio = null;
 			this.$song = $('<div class="jukebox-songs-song"></div>');
+			$('.jukebox-songs').append(this.$song);
 			this.$song.data("song", this);
 			//this.file = file;
 			//this.audio = new Audio(file);
@@ -247,7 +252,10 @@ class Song {
 
 		render() {
 			this.$song.html("");
-			//return $('<div class="jukebox-songs-song">' + this.file +'</div>');
+			this.$song.append('<img class="artwork" src="' + this.meta.artwork + '" />');
+			this.$song.append('<div class="jukebox-songs-song-art"></div>');
+			this.$song.append('<div class="jukebox-songs-song-title">' + this.meta.title + '</div>');
+			this.$song.append('<div class="jukebox-songs-song-title">' + this.meta.artist + '</div>');
 			return this.$song;
 		}
 
@@ -297,7 +305,9 @@ class Song {
 				this.meta = {
 					title: song.title,
 					artist: song.user.username,
+					artwork: song.artwork_url,
 				};
+				console.log(this.meta);
 				return song;
 			}.bind(this))
 			.then(function(song) {
