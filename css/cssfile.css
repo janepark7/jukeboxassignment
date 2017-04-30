@@ -1,3 +1,19 @@
+p {
+	height: 30px;
+}
+
+p2 {
+	height: 5px;
+}
+
+body {
+	font-family: "Arial", sans-serif;
+	color: black;
+	font-size: 15px;
+	background-color: #000000;
+	background-image: url('../images/musicheartwallpaper.jpg');
+}
+
 h1 {
 	padding-top: 55px;
 	padding-left: 5px;
@@ -6,16 +22,7 @@ h1 {
 	text-shadow: 2px 2px white;
 	font-size: 50px;
 	font-family: fantasy, cursive, sans-serif;
-	/* color: insert color here */
-}
 
-body {
-	font-family: "Arial", sans-serif;
-
-	color: black;
-	font-size: 15px;
-	background-color: #a30f2d;
-	background-image: url('../images/musicheartwallpaper.jpg');
 }
 
 .jukebox {
@@ -28,20 +35,12 @@ body {
 	background-color: rgba(235, 45, 83, .5);
 }
 
-/*
-.jukebox {
-	width: 90%;
-	display: block;
-	margin: 15px auto;
-	margin-left: 23px;
-	overflow: auto;
-	float: left;
-}
-*/
+/* JUKEBOX BUTTONS */
 
 .jukebox-master-hearts {
 	width: 95px;
 	height: 95px;
+	padding-bottom: 10px;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -58,6 +57,14 @@ body {
 .jukebox-buttons-play {
 	background-image: url('../images/heartplaybutton.svg');
 	padding-left: 5px;
+	transform: translateY(-8px);
+	transition-property: box-shadow, background-color, transform;
+	transition-duration: 125ms;
+	transition-timing-function: ease;
+}
+
+.jukebox-buttons-play:active {
+	transform: translateY(-6px);
 }
 
 .jukebox-buttons-pause {
@@ -73,34 +80,46 @@ body {
 	padding-left: 9px;
 }
 
-p {
-	height: 30px;
-}
-
-p2 {
-	height: 5px;
-}
-
 .jukebox-buttons-upload {
 	height: 80px;
 	padding-top: 15px;
 	padding-left: 20px;
 }
 
+/* SOUNDCLOUD INPUT */
+
+.soundcloud-input {
+	width: 250px;
+	height: 20px;
+	font-size: 15px;
+}
+
+/* JUKEBOX SONGS */
+.jukebox-songs-song,
+.jukebox-songs-song-title,
+.jukebox-songs-song-artist {
+	display: inline-block;
+	vertical-align: top;
+}
+
 .jukebox-songs {
-	text-align: center;
-	padding-top: 25px;
+	text-align: left;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-bottom: 10px;
 }
 
-.jukebox-songs-art {
-	top: 50px;
-	left: 50px;
-	margin: 0 auto;
+.jukebox-songs-song {
+	/*text-align: center;*/
+	margin: 20px;
+	display: inline-block;
+	vertical-align: top;
 }
 
 .artwork {
-	top: 50px;
-	left: 50px;
-	margin: 0 auto;
+	width: 55px;
+	height: 55px;
+	margin-right: auto;
+	border-radius: 2px;
 }

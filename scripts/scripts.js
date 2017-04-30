@@ -39,7 +39,7 @@ var Jukebox = {
 		this.addSong("./audiofiles/mama.mp3", {
 			title: "Me and Your Mama",
 			artist: "Childish Gambino",
-			artwork: ("./images/childishgambino.jpg"),
+			artwork: ("./images/childishgambino.jpg")
 		});
 
 		this.addSong("./audiofiles/selfcontrol.mp3", {
@@ -296,16 +296,17 @@ class Song {
 *  SoundCloudSong Class
 */
 
-
 	class SoundCloudSong extends Song {
 		constructor(url){
 			super();
 			SC.resolve(url)
 			.then(function(song) {
+				console.log('this', song);
 				this.meta = {
 					title: song.title,
 					artist: song.user.username,
 					artwork: song.artwork_url,
+					link: song.user.permalink_url,
 				};
 				console.log(this.meta);
 				return song;
@@ -318,6 +319,15 @@ class Song {
 			.then(function() {
 				this.render();
 			}.bind(this));
+		}
+		render() {
+			this.$song.html("");
+			this.$song.append('<img class="artwork" src="' + this.meta.artwork + '" />');
+			this.$song.append('<div class="jukebox-songs-song-art"></div>');
+			this.$song.append('<div class="jukebox-songs-song-title">' + this.meta.title + '</div>');
+			//Linking artist page 
+			this.$song.append('<div class="jukebox-songs-song-title">' + '<a href="' + this.meta.link + '" >' + this.meta.artist + '</a></div>');
+			return this.$song;
 		}
 	}
 
